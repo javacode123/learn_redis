@@ -1,0 +1,18 @@
+1: redis 是一种非关系型数据库，支持主从复制，持久化和事务等操作。支持5种类型数据的存储，string(字符串), set(集合), list(列表), zset(有续集合), hash(散列)。
+   redis 一般用来保存用户登录状态，通过 hash 保存 token(key=login, value={token: user})，zset 保存令牌最后一次出现的时间(key=recent, value=token)和浏览记录(key=viewed+token, value=records)。通过 redis 存储用户的购物车，hset 保存购物信息(key=cart+token, value={item, count})
+
+2: string(字符串)：
+	可以存储字符串，整型，浮点数。常用命令：conn.set(key, value) conn.get(key) conn.getrange(key, start, end) conn.append(key, value): 获取字符串并在后面追加 conn.incr('key', value): 获取值并增加 value 默认为 1  conn.decr(key, value)
+
+3: list(列表）
+	列表允许用户从两端推入或者弹出元素，获取元素列表，以及列表的一些基本操作。常用命令：conn.rpush(key, value) conn.lpush(key, value) conn.rpop(key) conn.lpop(key) conn.delete(key) conn.llen(key)
+
+4: set(集合）
+	无序的集合存储，可以使用一些简单的插入，删除操作。
+
+5: hash(散列）
+	redis 支持使用一个键来存储多个键值对。
+
+6: zset(有序集合)
+	基于跳表实现，指定键中存储的集合是有序的。通过对 value 添加一个 score 进行排序。 conn.zadd('z-key', {'a': 3, 'b': '0'})
+
